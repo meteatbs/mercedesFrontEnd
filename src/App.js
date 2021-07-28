@@ -7,14 +7,14 @@ import './App.scss';
 import Home from "./pages/Home/Home";
 import { Car } from "./pages/Car/Car";
 
-function App() {
+function App(props) {
   return (
+    <div className="App">
     <AppContext.Provider
 		
 		>
-    <div className="App">
+    
       <Provider store={store}>
-      <div className="App">
       <Router history={history}>
           <Switch>
           <Route path="/vehicles/:vehicleId/doors" >
@@ -26,12 +26,12 @@ function App() {
            </Route>
           </Switch>
         </Router>
-      </div>
       
     </Provider>
       
-    </div>
+    
     </AppContext.Provider>
+    </div>
   );
 }
 

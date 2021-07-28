@@ -1,8 +1,42 @@
 import  React,{useEffect,useState } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
+import { purple,red,green } from '@material-ui/core/colors';
+import { withStyles ,ThemeProvider,makeStyles,createTheme } from '@material-ui/core/styles';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link ,useHistory} from 'react-router-dom';
+import {CarIcon1,CarIcon2,CarIcon3,CarIcon4,CarIcon5,CarIcon6,CarIcon7,CarIcon8, CarIcon9,CarIcon10} from '../../components/icons/Icons'
 import {postCarByVehicleId} from './store/CarSlice'
+import './Car.scss'
+
+const GreenSwitch = withStyles({
+    
+    switchBase: {
+        
+      color: red[300],
+      '&$checked': {
+        color: green[500],
+      },
+      '&$checked + $track': {
+        backgroundColor: green[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+  const useStyles = makeStyles((theme) => ({
+    margin: {
+      margin: theme.spacing(1),
+    },
+  }));
+  
+  const theme = createTheme({
+    palette: {
+      primary: green,
+    },
+  });
 
 export const Car = () => {
 
@@ -30,6 +64,7 @@ export const Car = () => {
     const carsAll = useSelector(state => state.car.carDetail[0])
 
     
+    
 
     useEffect(() => {
         carsAll &&
@@ -46,6 +81,8 @@ export const Car = () => {
              })
 	}, [carsAll])
 
+    
+
     // console.log(fields.doorlockstatusfrontleft)
     console.log("carsAll",carsAll)
 
@@ -61,13 +98,28 @@ export const Car = () => {
    
 
     return (
-        <div>
-            <h1>Car page</h1>
-            <h1>Status</h1>
+        <div className="CarTogglePage">
+            <div className="year-selector">
+            <h4>Car Page Status</h4>
+            </div>
             
-            <h2>Left Front Side</h2>
-            <button>Lock/Unlock</button>
-            <Switch value={fields.doorlockstatusfrontleft}  onChange={
+            <ThemeProvider theme={theme}>
+                <Button size="small" variant="contained" color="primary" onClick={()=>history.push(`/`)}>Back To Home Page</Button>
+            </ThemeProvider>
+            
+            {/* <button >Home</button> */}
+
+            <div className="CarPage">
+                <div className="DoorDetail">
+            <div>
+            <h3>Left Front Side</h3>
+            {
+                fields.doorlockstatusfrontleft=="UNLOCKED"?
+                <h4>LOCK</h4>:<h4>UNLOCK</h4>
+            }
+            </div>
+            <div className="toggleDetail" >
+            <GreenSwitch  value={fields.doorlockstatusfrontleft}  onChange={
                 
                 (e) =>
                  {
@@ -92,10 +144,27 @@ export const Car = () => {
                 } 
                  
                 
-                 } checked={fields.doorlockstatusfrontleft=="UNLOCKED"?false:true}></Switch>
-            <h2>Right Front Side</h2>
-            <button>Lock/Unlock</button>
-            <Switch value={fields.doorlockstatusfrontright} onChange={
+                 } checked={fields.doorlockstatusfrontleft=="UNLOCKED"?false:true}></GreenSwitch>
+                 </div>
+            <div>
+            {
+                fields.doorlockstatusfrontleft=="UNLOCKED"?<CarIcon2/>
+                :<CarIcon6/>
+            }
+            </div>
+            
+            </div>
+            <div className="DoorDetail">
+                <div >
+                <h3>Right Front Side</h3>
+                {
+                fields.doorlockstatusfrontright=="UNLOCKED"?
+                <h4>LOCK</h4>:<h4>UNLOCK</h4>
+            }
+            </div>
+
+            <div className="toggleDetail" >
+            <GreenSwitch value={fields.doorlockstatusfrontright} onChange={
                 
                 (e) =>
                 {
@@ -118,23 +187,31 @@ export const Car = () => {
                 } 
                
                } 
+                
+                
+                }  checked={fields.doorlockstatusfrontright=="UNLOCKED"?false:true}></GreenSwitch>
+                
+                </div>
+                <div>
+                {
+                fields.doorlockstatusfrontright=="UNLOCKED"?<CarIcon4/>
+                :<CarIcon6/>
+            }
+                </div>
+            
+                </div>
 
-                //  {
-                //      console.log("e target",e.target.value)
-                //      setFields({ ...fields,
-                //         doorlockstatusfrontright: fields.doorlockstatusfrontright=="UNLOCKED"?"LOCKED":"UNLOCKED" 
-                //  })
-                //  if (fields) {
-                //      console.log("fields:",fields)
-                //      fields.doorlockstatusfrontright=="UNLOCKED"?fields.doorlockstatusfrontright="LOCKED":fields.doorlockstatusfrontright="LOCKED"
-                //      dispatch(postCarByVehicleId(fields))
-                //  }} 
-                
-                
-                }  checked={fields.doorlockstatusfrontright=="UNLOCKED"?false:true}></Switch>
-            <h2>Left Back Side</h2>
-            <button>Lock/Unlock</button>
-            <Switch  value={fields.doorlockstatusrearleft} onChange={
+               
+                <div className="DoorDetail">
+                    <div>
+            <h3>Left Back Side</h3>
+            {
+                fields.doorlockstatusrearleft=="UNLOCKED"?
+                <h4>LOCK</h4>:<h4>UNLOCK</h4>
+            }
+            </div>
+            <div className="toggleDetail" >
+            <GreenSwitch  value={fields.doorlockstatusrearleft} onChange={
 
                 (e) =>
                 {
@@ -155,10 +232,26 @@ export const Car = () => {
                 } 
                
                } 
-                }  checked={carsAll&&fields.doorlockstatusrearleft=="UNLOCKED"?false:true}></Switch>
-            <h2>Right Back Side</h2>
-            <button>Lock/Unlock</button>
-            <Switch value={fields.doorlockstatusrearright} onChange={
+                }  checked={carsAll&&fields.doorlockstatusrearleft=="UNLOCKED"?false:true}></GreenSwitch>
+                </div>
+                <div>
+                {
+                fields.doorlockstatusrearleft=="UNLOCKED"?<CarIcon5/>
+                :<CarIcon6/>
+            }
+            </div>
+            </div>
+                
+                <div className="DoorDetail">
+                    <div>
+            <h3>Right Back Side</h3>
+            {
+                fields.doorlockstatusrearright=="UNLOCKED"?
+                <h4>LOCK</h4>:<h4>UNLOCK</h4>
+            }
+            </div>
+            <div className="toggleDetail" >
+            <GreenSwitch value={fields.doorlockstatusrearright} onChange={
                 
                 (e) =>
                 {
@@ -179,10 +272,17 @@ export const Car = () => {
                 } 
                
                } 
-                }  checked={carsAll&&fields.doorlockstatusrearright=="UNLOCKED"?false:true}></Switch>
-            {/* <Switch value={fields.doorlockstatusrearright} onChange={e => setFields({ ...fields, doorlockstatusrearright: fields.doorlockstatusrearright=="UNLOCKED"?"LOCKED":"UNLOCKED" })}  checked={carsAll&&fields.doorlockstatusrearright=="UNLOCKED"?false:true}></Switch> */}
-            <p>Back To Home Page</p>
-            <button onClick={()=>history.push(`/`)}>Home</button>
+                }  checked={carsAll&&fields.doorlockstatusrearright=="UNLOCKED"?false:true}></GreenSwitch>
+                </div>
+                <div>
+             {
+                fields.doorlockstatusrearright=="UNLOCKED"?<CarIcon3/>
+                :<CarIcon6/>
+            }
+                </div>
+             </div>
+             </div>
+            
         </div>
     )
 }

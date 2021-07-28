@@ -1,0 +1,39 @@
+.CarTogglePage{
+    
+    background-image: url("https://i.imgur.com/oOFN9dF.jpg");
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+  min-height: 100%;
+    color: #f1f1f1;
+    .CarPage{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        color: #f1f1f1;
+    
+        .year-selector{
+            color: #f1f1f1;
+            justify-self: center;
+            padding: 20px;
+        }
+        .DoorDetail{
+            display: flex;
+            flex-direction: column;
+            .toggleDetail{
+                margin-bottom: 30px;
+            }
+        }
+        
+    }
+}
+
+
+
+.page-heading{
+    margin: 20px auto;
+}

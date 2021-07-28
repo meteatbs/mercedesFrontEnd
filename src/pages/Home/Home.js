@@ -20,9 +20,9 @@ const Home = () => {
     
 
     return (
-        <div>
+        <div className="HomePage">
             <h1>Car List</h1>
-            <div>
+            <div className="car-grid">
             {carsAll&&carsAll.map(car => <CarTile  key={car.vehicleId} carId={car.vehicleId}>list</CarTile>)}
             </div>
         </div>
